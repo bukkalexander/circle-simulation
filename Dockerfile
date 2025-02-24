@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libxi-dev \
     libxinerama-dev \
     libxcursor-dev \
+    libgl1-mesa-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace

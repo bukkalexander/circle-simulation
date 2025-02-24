@@ -37,5 +37,5 @@ add_executable(${TARGET_EXECUTABLE}
 # Target Compile Options, Libraries, and Includes
 # ------------------------------------------------------------------------------
 target_compile_options(${TARGET_EXECUTABLE} PRIVATE -Wall -Wextra -Werror)
-target_link_libraries(${TARGET_EXECUTABLE} PRIVATE glfw)
+target_link_libraries(${TARGET_EXECUTABLE} PRIVATE glfw GL)
 target_include_directories(${TARGET_EXECUTABLE} PRIVATE ${PROJECT_SOURCE_DIR})
