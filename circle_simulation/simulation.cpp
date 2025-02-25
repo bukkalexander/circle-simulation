@@ -11,7 +11,7 @@ Simulation::Simulation(Window& window, Renderer& renderer, float ups, float fps)
     circles_.emplace_back(
         glm::vec2(consts::WINDOW_WIDTH / 2.0F * consts::PIXELS_TO_METERS,
                   (consts::WINDOW_HEIGHT - consts::WINDOW_TOP) * consts::PIXELS_TO_METERS),
-        glm::vec2(0.0F, 0.0F), 0.1F);
+        glm::vec2(0.5F, 0.0F), 0.1F);
 }
 
 void Simulation::update() {
