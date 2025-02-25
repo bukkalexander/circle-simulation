@@ -31,6 +31,10 @@ FetchContent_MakeAvailable(glfw)
 set(TARGET_EXECUTABLE ${PROJECT_NAME})
 add_executable(${TARGET_EXECUTABLE}
     circle_simulation/main.cpp
+    circle_simulation/simulation.cpp
+    circle_simulation/window.cpp
+    circle_simulation/renderer.cpp
+    circle_simulation/circle.cpp
 )
 
 # ------------------------------------------------------------------------------

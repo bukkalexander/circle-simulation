@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# GLFW dependencies 
+# GLFW and GL dependencies 
 RUN apt-get update && apt-get install -y \
     libx11-dev \
     libxrandr-dev \
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libxinerama-dev \
     libxcursor-dev \
     libgl1-mesa-dev \
+    libglm-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
