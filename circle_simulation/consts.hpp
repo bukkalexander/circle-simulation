@@ -1,3 +1,4 @@
+#pragma once
 namespace consts {
 constexpr int WINDOW_WIDTH = 640;
 constexpr int WINDOW_HEIGHT = 480;
@@ -9,4 +10,5 @@ constexpr float UPS = 60.0F;
 constexpr float FPS = 60.0F;
 constexpr float PIXELS_PER_METER = 100.0F;
 constexpr float METERS_TO_PIXELS = PIXELS_PER_METER;
+constexpr float PIXELS_TO_METERS = 1.0F / PIXELS_PER_METER;
 }  // namespace consts

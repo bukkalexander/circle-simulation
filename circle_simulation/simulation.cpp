@@ -8,7 +8,10 @@
 Simulation::Simulation(Window& window, Renderer& renderer, float ups, float fps)
     : window_(window), renderer_(renderer), ups_(ups), fps_(fps) {
     time_step_ = 1.0F / ups_;
-    circles_.emplace_back(glm::vec2(3.2F, 2.4F), glm::vec2(1.0F, 0.5F), 0.2F);
+    circles_.emplace_back(
+        glm::vec2(consts::WINDOW_WIDTH / 2.0F * consts::PIXELS_TO_METERS,
+                  (consts::WINDOW_HEIGHT - consts::WINDOW_TOP) * consts::PIXELS_TO_METERS),
+        glm::vec2(0.0F, 0.0F), 0.1F);
 }
 
 void Simulation::update() {

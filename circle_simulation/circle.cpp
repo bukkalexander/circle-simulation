@@ -1,19 +1,20 @@
 #include "circle_simulation/circle.hpp"
 
 #include <glm/glm.hpp>
-#include <iostream>
 
-#include "circle_simulation/consts.hpp"
+#include "circle_simulation/utils.hpp"
 
+// NOLINTBEGIN (bugprone-easily-swappable-parameters)
 Circle::Circle(glm::vec2 position_, glm::vec2 velocity_, float radius_)
     : position(position_), velocity(velocity_), radius(radius_) {}
-
+// NOLINTEND (bugprone-easily-swappable-parameters)
 void Circle::update(float time_step) {
-    position = glm::vec2(1.0F, 1.0F);
-    std::cout << time_step << '\n';
-    std::cout << position.x << position.y << '\n';
+    const glm::vec2 gravity(0.0F, -9.8F);
+    velocity += gravity * time_step;
+    position += velocity * time_step;
 }
 
 void Circle::render(const Renderer& renderer) const {
-    renderer.draw_circle(position * consts::METERS_TO_PIXELS, radius * consts::METERS_TO_PIXELS);
+    renderer.draw_circle(utils::world_to_pixel_vec2(position),
+                         utils::world_to_pixel_radius(radius));
 }
