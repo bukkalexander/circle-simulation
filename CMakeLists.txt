@@ -35,6 +35,7 @@ add_executable(${TARGET_EXECUTABLE}
     circle_simulation/window.cpp
     circle_simulation/renderer.cpp
     circle_simulation/circle.cpp
+    circle_simulation/cli.cpp
 )
 
 # ------------------------------------------------------------------------------

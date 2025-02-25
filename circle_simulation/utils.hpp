@@ -1,13 +1,13 @@
 #pragma once
-#include <glm/vec2.hpp>
 
-#include "circle_simulation/consts.hpp"
+#include "circle_simulation/types.hpp"
 namespace utils {
 
-glm::vec2 world_to_pixel_vec2(glm::vec2 vec) {
-    return {vec.x * consts::METERS_TO_PIXELS,
-            consts::WINDOW_HEIGHT - (vec.y * consts::METERS_TO_PIXELS)};
+vec2 world_to_pixel_vec2(vec2 vec, real_t meters_to_pixels, real_t world_height) {
+    return {vec.x * meters_to_pixels, (world_height - vec.y) * meters_to_pixels};
 }
 
-float world_to_pixel_radius(float radius) { return radius * consts::METERS_TO_PIXELS; }
+real_t world_to_pixel_radius(real_t radius, real_t meters_to_pixels) {
+    return radius * meters_to_pixels;
+}
 }  // namespace utils

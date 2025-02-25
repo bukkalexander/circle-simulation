@@ -1,0 +1,61 @@
+#include "cli.hpp"
+
+#include <cstdlib>
+#include <iostream>
+
+Cli::Cli(const std::vector<std::string>& args) {
+    if (!parse_args(args)) {
+        print_help();
+        std::exit(EXIT_FAILURE);
+    }
+}
+
+void Cli::print_help() const {
+    std::cout << "Usage: ./circle_simulation [options]\n"
+              << "Options:\n"
+              << "  --window_width <int>       Window width in pixels (default: 640)\n"
+              << "  --window_height <int>      Window height in pixels (default: 480)\n"
+              << "  --min_radius <double>      Minimum circle radius in meters (default: 0.1)\n"
+              << "  --max_radius <double>      Maximum circle radius in meters (default: 0.3)\n"
+              << "  --spawn_limit <int>        Maximum number of circles to spawn (default: 10)\n"
+              << "  --spawn_interval <double>  number of updates between spawns (default: 60)\n"
+              << "  --gravity <double>         Gravity acceleration (default: 9.8)\n"
+              << "  --fps <double>             Frames per second (default: 60)\n"
+              << "  --ups <double>             Updates per second (default: 60)\n"
+              << "  --help                     Print this help message\n"
+              << "\nExample:\n"
+              << "  ./circle_simulation --window_width 800 --window_height 600 "
+                 "--min_radius 0.05 --max_radius 0.25 --spawn_limit 20 "
+                 "--spawn_interval 20.0 --gravity 9.81 --fps 75 --ups 90\n";
+}
+
+bool Cli::parse_args(const std::vector<std::string>& args) {
+    for (size_t i = 1; i < args.size(); ++i) {
+        const std::string& arg = args[i];
+        if (arg == "--window_width" && i + 1 < args.size()) {
+            user_config_.window_width = std::atoi(args[++i].c_str());
+        } else if (arg == "--window_height" && i + 1 < args.size()) {
+            user_config_.window_height = std::atoi(args[++i].c_str());
+        } else if (arg == "--min_radius" && i + 1 < args.size()) {
+            user_config_.min_circle_radius = std::atof(args[++i].c_str());
+        } else if (arg == "--max_radius" && i + 1 < args.size()) {
+            user_config_.max_circle_radius = std::atof(args[++i].c_str());
+        } else if (arg == "--spawn_limit" && i + 1 < args.size()) {
+            user_config_.spawn_limit = std::atoi(args[++i].c_str());
+        } else if (arg == "--spawn_interval" && i + 1 < args.size()) {
+            user_config_.spawn_interval = std::atof(args[++i].c_str());
+        } else if (arg == "--gravity" && i + 1 < args.size()) {
+            user_config_.gravity = std::atof(args[++i].c_str());
+        } else if (arg == "--fps" && i + 1 < args.size()) {
+            user_config_.fps = std::atof(args[++i].c_str());
+        } else if (arg == "--ups" && i + 1 < args.size()) {
+            user_config_.ups = std::atof(args[++i].c_str());
+        } else if (arg == "--help") {
+            return false;
+        } else {
+            std::cerr << "Unknown option: " << arg << "\n";
+            return false;
+        }
+    }
+    return true;
+}

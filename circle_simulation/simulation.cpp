@@ -1,17 +1,17 @@
 #include "circle_simulation/simulation.hpp"
 
 #include "circle_simulation/circle.hpp"
-#include "circle_simulation/consts.hpp"
 #include "circle_simulation/renderer.hpp"
+#include "circle_simulation/types.hpp"
 #include "circle_simulation/window.hpp"
 
-Simulation::Simulation(Window& window, Renderer& renderer, float ups, float fps)
-    : window_(window), renderer_(renderer), ups_(ups), fps_(fps) {
-    time_step_ = 1.0F / ups_;
-    circles_.emplace_back(
-        glm::vec2(consts::WINDOW_WIDTH / 2.0F * consts::PIXELS_TO_METERS,
-                  (consts::WINDOW_HEIGHT - consts::WINDOW_TOP) * consts::PIXELS_TO_METERS),
-        glm::vec2(0.5F, 0.0F), 0.1F);
+Simulation::Simulation(Window& window, Renderer& renderer, const GlobalConfig& config)
+    : window_(window),
+      renderer_(renderer),
+      ups_(config.ups),
+      fps_(config.fps),
+      time_step_(1.0 / config.ups) {
+    circles_.emplace_back(vec2(3.0, 1.0), vec2(0.5, 0.0), 0.1, config);
 }
 
 void Simulation::update() {

@@ -1,44 +1,48 @@
 #include "circle_simulation/circle.hpp"
 
-#include <glm/glm.hpp>
-
+#include "circle_simulation/global_config.hpp"
+#include "circle_simulation/types.hpp"
 #include "circle_simulation/utils.hpp"
 
 // NOLINTBEGIN (bugprone-easily-swappable-parameters)
-Circle::Circle(glm::vec2 position_, glm::vec2 velocity_, float radius_)
-    : position(position_), velocity(velocity_), radius(radius_) {}
+Circle::Circle(vec2 position, vec2 velocity, real_t radius, const GlobalConfig& config)
+    : position_(position),
+      velocity_(velocity),
+      radius_(radius),
+      gravity_(0.0, -config.gravity),
+      world_left_(config.window_left * config.pixels_to_meters),
+      world_right_(config.window_right * config.pixels_to_meters),
+      world_bottom_(config.window_top * config.pixels_to_meters),
+      world_top_(config.window_bottom * config.pixels_to_meters),
+      world_width_(config.window_width * config.pixels_to_meters),
+      world_height_(config.window_height * config.pixels_to_meters),
+      meters_to_pixels_(config.meters_to_pixels) {}
 // NOLINTEND (bugprone-easily-swappable-parameters)
-void Circle::update(float time_step) {
-    const glm::vec2 gravity(0.0F, -9.8F);
-    velocity += gravity * time_step;
-    position += velocity * time_step;
 
-    // Define world boundaries in meters
-    float world_left = consts::WINDOW_LEFT * consts::PIXELS_TO_METERS;
-    float world_right = consts::WINDOW_WIDTH * consts::PIXELS_TO_METERS;
-    float world_bottom = 0.0F;
-    float world_top = consts::WINDOW_HEIGHT * consts::PIXELS_TO_METERS;
+void Circle::update(real_t time_step) {
+    velocity_ += gravity_ * time_step;
+    position_ += velocity_ * time_step;
 
     // Check left/right collisions:
-    if (position.x - radius < world_left) {
-        position.x = world_left + radius;  // reposition inside the left boundary
-        velocity.x = -velocity.x;          // reflect horizontal velocity
-    } else if (position.x + radius > world_right) {
-        position.x = world_right - radius;  // reposition inside the right boundary
-        velocity.x = -velocity.x;
+    if (position_.x - radius_ < world_left_) {
+        position_.x = world_left_ + radius_;  // reposition inside the left boundary
+        velocity_.x = -velocity_.x;           // reflect horizontal velocity
+    } else if (position_.x + radius_ > world_right_) {
+        position_.x = world_right_ - radius_;  // reposition inside the right boundary
+        velocity_.x = -velocity_.x;
     }
 
     // Check bottom/top collisions:
-    if (position.y - radius < world_bottom) {
-        position.y = world_bottom + radius;  // reposition above the bottom boundary
-        velocity.y = -velocity.y;
-    } else if (position.y + radius > world_top) {
-        position.y = world_top - radius;  // reposition below the top boundary
-        velocity.y = -velocity.y;
+    if (position_.y - radius_ < world_bottom_) {
+        position_.y = world_bottom_ + radius_;  // reposition above the bottom boundary
+        velocity_.y = -velocity_.y;
+    } else if (position_.y + radius_ > world_top_) {
+        position_.y = world_top_ - radius_;  // reposition below the top boundary
+        velocity_.y = -velocity_.y;
     }
 }
 
 void Circle::render(const Renderer& renderer) const {
-    renderer.draw_circle(utils::world_to_pixel_vec2(position),
-                         utils::world_to_pixel_radius(radius));
+    renderer.draw_circle(utils::world_to_pixel_vec2(position_, meters_to_pixels_, world_height_),
+                         utils::world_to_pixel_radius(radius_, meters_to_pixels_));
 }

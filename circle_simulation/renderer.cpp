@@ -5,7 +5,9 @@
 #include <cmath>
 #include <glm/glm.hpp>
 
-Renderer::Renderer(int left, int right, int bottom, int top) {
+#include "circle_simulation/types.hpp"
+
+Renderer::Renderer(real_t left, real_t right, real_t bottom, real_t top) {
     // Set up a 2D orthographic projection:
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -16,18 +18,18 @@ Renderer::Renderer(int left, int right, int bottom, int top) {
 
 // NOLINTBEGIN(readability-convert-member-functions-to-static)
 
-void Renderer::draw_circle(glm::vec2 center, float radius) const {
-    glColor3f(1.0F, 0.0F, 0.0F);
+void Renderer::draw_circle(vec2 center, real_t radius) const {
+    glColor3d(1.0, 0.0, 0.0);
     constexpr int NUM_SEGMENTS = 100;
     glBegin(GL_TRIANGLE_FAN);
-    glVertex2f(center.x, center.y);  // center vertex
+    glVertex2d(center.x, center.y);  // center vertex
     for (int i = 0; i <= NUM_SEGMENTS; ++i) {
-        constexpr float math_pi = 3.1415926F;
-        constexpr float whole_circle_rad = 2.0F * math_pi;
-        float theta = whole_circle_rad * (float)i / NUM_SEGMENTS;
-        float x_offset = radius * cosf(theta);
-        float y_offset = radius * sinf(theta);
-        glVertex2f(center.x + x_offset, center.y + y_offset);
+        constexpr real_t math_pi = 3.14159265358979323846;
+        constexpr real_t whole_circle_rad = 2.0 * math_pi;
+        real_t theta = whole_circle_rad * (real_t)i / NUM_SEGMENTS;
+        real_t x_offset = radius * cos(theta);
+        real_t y_offset = radius * sin(theta);
+        glVertex2d(center.x + x_offset, center.y + y_offset);
     }
     glEnd();
 }
