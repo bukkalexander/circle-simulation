@@ -11,10 +11,10 @@ struct CliArgs {
     // Circle simulation parameters.
     real_t min_circle_radius = 0.1;  // meters
     real_t max_circle_radius = 0.3;  // meters
-    int spawn_limit = 10;            // number of circles to spawn
-    real_t spawn_interval = 60.0;    // number of updates between spawns
+    int spawn_limit = 100;           // number of circles to spawn
+    int spawn_interval = 100;        // number of updates between spawns
     real_t gravity = 9.8;            // m/s^2
-    real_t fps = 60.0;               // frames per second
-    real_t ups = 1000.0;             // updates per second
+    int fps = 60;                    // frames per second
+    int ups = 1000;                  // updates per second
 };
 // NOLINTEND(readability-magic-numbers)

@@ -9,10 +9,10 @@ struct Config {
     const real_t min_circle_radius;
     const real_t max_circle_radius;
     const int spawn_limit;
-    const real_t spawn_interval;
+    const int spawn_interval;
     const real_t gravity;
-    const real_t fps;
-    const real_t ups;
+    const int fps;
+    const int ups;
     const real_t pixels_per_meter = 100.0;
 
     // Derived values

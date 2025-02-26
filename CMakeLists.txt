@@ -43,6 +43,7 @@ add_executable(${TARGET_EXECUTABLE}
     circle_simulation/renderer.cpp
     circle_simulation/circle.cpp
     circle_simulation/world.cpp
+    circle_simulation/circle_spawner.cpp
 )
 
 # ------------------------------------------------------------------------------
