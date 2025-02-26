@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04 AS builder
 
 # Avoid interactive prompts during package installation.
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,4 +26,18 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /workspace
 
-CMD [ "bash" ]
+COPY . .
+
+RUN mkdir -p build && cd build && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release && \
+    cmake --build .
+
+CMD [ "/bin/bash" ]
+
+
+FROM ubuntu:20.04 AS release
+RUN apt-get update && apt-get install -y libgl1
+
+WORKDIR /release
+COPY --from=builder /workspace/build/circle_simulation/ ./
+ENTRYPOINT ["./circle_simulation"]

@@ -1,0 +1,10 @@
+.git
+.vscode
+*.zip
+.cache
+build
+release
+release.sh
+README.md
+release_template.md
+circle_simulation.sh

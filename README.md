@@ -9,14 +9,14 @@ This project requires docker for building and running.
 
 ## Build and run
 
-To build and run the project, simply run the script `build_and_run.sh`:
+To build and run the project, simply run the script `circle_simulation.sh`:
 
 ```bash
-./build_and_run.sh
+./circle_simulation.sh
 ```
 
-## Lint code
+For cli options, run
 
 ```bash
-run-clang-tidy -p ./build -q
+./circle_simulation.sh --help
 ```
