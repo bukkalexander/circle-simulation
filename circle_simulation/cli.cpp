@@ -33,23 +33,23 @@ bool Cli::parse_args(const std::vector<std::string>& args) {
     for (size_t i = 1; i < args.size(); ++i) {
         const std::string& arg = args[i];
         if (arg == "--window_width" && i + 1 < args.size()) {
-            user_config_.window_width = std::atoi(args[++i].c_str());
+            args_.window_width = std::atoi(args[++i].c_str());
         } else if (arg == "--window_height" && i + 1 < args.size()) {
-            user_config_.window_height = std::atoi(args[++i].c_str());
+            args_.window_height = std::atoi(args[++i].c_str());
         } else if (arg == "--min_radius" && i + 1 < args.size()) {
-            user_config_.min_circle_radius = std::atof(args[++i].c_str());
+            args_.min_circle_radius = std::atof(args[++i].c_str());
         } else if (arg == "--max_radius" && i + 1 < args.size()) {
-            user_config_.max_circle_radius = std::atof(args[++i].c_str());
+            args_.max_circle_radius = std::atof(args[++i].c_str());
         } else if (arg == "--spawn_limit" && i + 1 < args.size()) {
-            user_config_.spawn_limit = std::atoi(args[++i].c_str());
+            args_.spawn_limit = std::atoi(args[++i].c_str());
         } else if (arg == "--spawn_interval" && i + 1 < args.size()) {
-            user_config_.spawn_interval = std::atof(args[++i].c_str());
+            args_.spawn_interval = std::atof(args[++i].c_str());
         } else if (arg == "--gravity" && i + 1 < args.size()) {
-            user_config_.gravity = std::atof(args[++i].c_str());
+            args_.gravity = std::atof(args[++i].c_str());
         } else if (arg == "--fps" && i + 1 < args.size()) {
-            user_config_.fps = std::atof(args[++i].c_str());
+            args_.fps = std::atof(args[++i].c_str());
         } else if (arg == "--ups" && i + 1 < args.size()) {
-            user_config_.ups = std::atof(args[++i].c_str());
+            args_.ups = std::atof(args[++i].c_str());
         } else if (arg == "--help") {
             return false;
         } else {

@@ -16,8 +16,6 @@ Renderer::Renderer(real_t left, real_t right, real_t bottom, real_t top) {
     glLoadIdentity();
 }
 
-// NOLINTBEGIN(readability-convert-member-functions-to-static)
-
 void Renderer::draw_circle(vec2 center, real_t radius) const {
     glColor3d(1.0, 0.0, 0.0);
     constexpr int NUM_SEGMENTS = 100;
@@ -35,5 +33,3 @@ void Renderer::draw_circle(vec2 center, real_t radius) const {
 }
 
 void Renderer::clear() const { glClear(GL_COLOR_BUFFER_BIT); }
-
-// NOLINTEND(readability-convert-member-functions-to-static)

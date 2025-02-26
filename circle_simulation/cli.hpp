@@ -3,18 +3,18 @@
 #include <string>
 #include <vector>
 
-#include "circle_simulation/user_config.hpp"
+#include "circle_simulation/cli_args.hpp"
 
 class Cli {
    public:
     explicit Cli(const std::vector<std::string>& args);
 
-    [[nodiscard]] UserConfig get_user_config() const { return user_config_; }
+    CliArgs get_args() const { return args_; }
 
     void print_help() const;
 
    private:
     bool parse_args(const std::vector<std::string>& args);
 
-    UserConfig user_config_;
+    CliArgs args_;
 };

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "circle_simulation/cli_args.hpp"
 #include "circle_simulation/types.hpp"
-#include "circle_simulation/user_config.hpp"
-struct GlobalConfig {
-    // Base user values.
+struct Config {
+    // Base user values
     const int window_width;
     const int window_height;
     const real_t min_circle_radius;
@@ -15,7 +15,7 @@ struct GlobalConfig {
     const real_t ups;
     const real_t pixels_per_meter = 100.0;
 
-    // Derived values.
+    // Derived values
     const real_t window_left = 0;
     const real_t window_right;
     const real_t window_top = 0;
@@ -23,19 +23,19 @@ struct GlobalConfig {
     const real_t meters_to_pixels;
     const real_t pixels_to_meters;
 
-    GlobalConfig(const UserConfig &user)
-        : window_width(user.window_width),
-          window_height(user.window_height),
-          min_circle_radius(user.min_circle_radius),
-          max_circle_radius(user.max_circle_radius),
-          spawn_limit(user.spawn_limit),
-          spawn_interval(user.spawn_interval),
-          gravity(user.gravity),
-          fps(user.fps),
-          ups(user.ups),
+    Config(const CliArgs &args)
+        : window_width(args.window_width),
+          window_height(args.window_height),
+          min_circle_radius(args.min_circle_radius),
+          max_circle_radius(args.max_circle_radius),
+          spawn_limit(args.spawn_limit),
+          spawn_interval(args.spawn_interval),
+          gravity(args.gravity),
+          fps(args.fps),
+          ups(args.ups),
           // Derived values
-          window_right(user.window_width),
-          window_bottom(user.window_height),
+          window_right(args.window_width),
+          window_bottom(args.window_height),
           meters_to_pixels(pixels_per_meter),
           pixels_to_meters(1.0F / pixels_per_meter) {}
 };

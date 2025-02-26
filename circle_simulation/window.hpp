@@ -10,7 +10,7 @@ class Window {
 
     ~Window();
 
-    [[nodiscard]] bool shouldClose() const;
+    bool shouldClose() const;
 
     void swapBuffers() const;
 

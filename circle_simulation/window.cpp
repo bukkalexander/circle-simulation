@@ -5,19 +5,16 @@
 #include <stdexcept>
 
 Window::Window(int width, int height, const std::string& title) {
-    // Initialize GLFW
     if (glfwInit() == 0) {
         throw std::runtime_error("Failed to initialize GLFW");
     }
 
-    // Create the GLFW window.
     window_ = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
     if (window_ == nullptr) {
         glfwTerminate();
         throw std::runtime_error("Failed to create GLFW window");
     }
 
-    // Make the window's context current.
     glfwMakeContextCurrent(window_);
 }
 

@@ -2,7 +2,8 @@
 
 #include "circle_simulation/types.hpp"
 
-struct UserConfig {
+// NOLINTBEGIN(readability-magic-numbers)
+struct CliArgs {
     // Window configuration (in pixels)
     int window_width = 640;
     int window_height = 480;
@@ -16,3 +17,4 @@ struct UserConfig {
     real_t fps = 60.0;               // frames per second
     real_t ups = 60.0;               // updates per second
 };
+// NOLINTEND(readability-magic-numbers)
