@@ -14,7 +14,7 @@ class Simulation {
     void run();
 
    private:
-    void update();
+    void update(real_t time_step);
     void render();
 
     Window& window_;

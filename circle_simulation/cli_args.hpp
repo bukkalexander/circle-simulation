@@ -15,6 +15,6 @@ struct CliArgs {
     real_t spawn_interval = 60.0;    // number of updates between spawns
     real_t gravity = 9.8;            // m/s^2
     real_t fps = 60.0;               // frames per second
-    real_t ups = 60.0;               // updates per second
+    real_t ups = 1000.0;             // updates per second
 };
 // NOLINTEND(readability-magic-numbers)

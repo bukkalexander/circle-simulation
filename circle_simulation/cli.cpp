@@ -21,7 +21,7 @@ void Cli::print_help() const {
               << "  --spawn_interval <double>  number of updates between spawns (default: 60)\n"
               << "  --gravity <double>         Gravity acceleration (default: 9.8)\n"
               << "  --fps <double>             Frames per second (default: 60)\n"
-              << "  --ups <double>             Updates per second (default: 60)\n"
+              << "  --ups <double>             Updates per second (default: 1000)\n"
               << "  --help                     Print this help message\n"
               << "\nExample:\n"
               << "  ./circle_simulation --window_width 800 --window_height 600 "

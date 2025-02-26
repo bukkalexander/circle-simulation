@@ -8,6 +8,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# If no build type is specified, default to Debug.
+if(NOT CMAKE_BUILD_TYPE)
+  message(STATUS "No build type specified, defaulting to Debug")
+  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Build type" FORCE)
+endif()
+
 # ------------------------------------------------------------------------------
 # Options for External Dependencies
 # ------------------------------------------------------------------------------
@@ -45,3 +51,12 @@ add_executable(${TARGET_EXECUTABLE}
 target_compile_options(${TARGET_EXECUTABLE} PRIVATE -Wall -Wextra -Werror)
 target_link_libraries(${TARGET_EXECUTABLE} PRIVATE glfw GL)
 target_include_directories(${TARGET_EXECUTABLE} PRIVATE ${PROJECT_SOURCE_DIR})
+
+# ------------------------------------------------------------------------------
+# Build Configuration Specific Flags
+# ------------------------------------------------------------------------------
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+  message(STATUS "Configuring Release build settings")
+  target_compile_definitions(${TARGET_EXECUTABLE} PRIVATE NDEBUG)
+  target_compile_options(${TARGET_EXECUTABLE} PRIVATE -O3 -march=native -flto)
+endif()
