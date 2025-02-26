@@ -1,6 +1,7 @@
 #include "circle_simulation/simulation.hpp"
 
 #include <chrono>
+#include <iomanip>
 #include <iostream>
 
 #include "circle_simulation/circle.hpp"
@@ -20,6 +21,12 @@ void Simulation::update(real_t time_step) {
     for (auto& circle : circles_) {
         circle.update(time_step);
     }
+
+    for (auto it1 = circles_.begin(); it1 != circles_.end(); ++it1) {
+        for (auto it2 = std::next(it1); it2 != circles_.end(); ++it2) {
+            it1->resolve_collision(*it2);
+        }
+    }
 }
 
 void Simulation::render() {
@@ -34,12 +41,12 @@ void Simulation::run() {
     using clock = std::chrono::steady_clock;
 
     auto cycle_start_time = clock::now();
-
     auto last_update_time = cycle_start_time;
     auto last_render_time = cycle_start_time;
 
     int update_count = 0;
     int render_count = 0;
+    int cycle_counter = 0;
 
     const double target_update_period = 1.0 / settings_.ups;
     const double target_render_period = 1.0 / settings_.fps;
@@ -69,9 +76,15 @@ void Simulation::run() {
         double cycle_duration =
             std::chrono::duration<double>(clock::now() - cycle_start_time).count();
         if (cycle_duration >= 1.0) {
+            cycle_counter++;
             double average_ups = update_count / cycle_duration;
             double average_fps = render_count / cycle_duration;
-            std::cout << "UPS: " << average_ups << ", FPS: " << average_fps << '\n';
+            // NOLINTBEGIN(readability-magic-numbers)
+            std::cout << "Cycle: " << std::setw(4) << cycle_counter << " | UPS: " << std::fixed
+                      << std::setprecision(1) << std::setw(8) << average_ups
+                      << " | FPS: " << std::fixed << std::setprecision(1) << std::setw(6)
+                      << average_fps << " | Circles: " << std::setw(8) << circles_.size() << '\n';
+            // NOLINTEND(readability-magic-numbers)
             update_count = 0;
             render_count = 0;
             cycle_start_time = clock::now();
