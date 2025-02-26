@@ -14,10 +14,13 @@ class CircleSpawner {
     void update(std::vector<Circle>& circles);
 
    private:
+    bool candidate_collides(const std::vector<Circle>& circles, const Circle& candidate) const;
+    vec2 generate_candidate_position(real_t candidate_radius) const;
+
     const World& world_;
     const CircleSettings settings_;
     int update_counter_ = 0;
     int spawned_count_ = 0;
-    std::mt19937 gen_;
+    mutable std::mt19937 gen_;
     std::uniform_real_distribution<real_t> radius_dist_;
 };

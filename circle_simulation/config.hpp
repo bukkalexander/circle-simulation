@@ -10,6 +10,7 @@ struct Config {
     const real_t max_circle_radius;
     const int spawn_limit;
     const int spawn_interval;
+    const int spawn_max_retries = 1000;
     const real_t gravity;
     const int fps;
     const int ups;

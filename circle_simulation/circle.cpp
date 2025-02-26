@@ -1,5 +1,7 @@
 #include "circle_simulation/circle.hpp"
 
+#include <glm/gtx/norm.hpp>
+
 #include "circle_simulation/types.hpp"
 #include "circle_simulation/world.hpp"
 
@@ -15,4 +17,10 @@ void Circle::update(real_t time_step) {
 
 void Circle::render(const Renderer& renderer) const {
     renderer.draw_circle(world_.to_pixels(position_), world_.to_pixels(radius_));
+}
+
+bool Circle::collides(const Circle& other) const {
+    real_t distance_sq = glm::length2(position_ - other.position_);
+    real_t combined_radius = radius_ + other.radius_;
+    return distance_sq < combined_radius * combined_radius;
 }

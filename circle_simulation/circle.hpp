@@ -9,6 +9,10 @@ class Circle {
     Circle(vec2 position, vec2 velocity, real_t radius, const World& world);
     void update(real_t time_step);
     void render(const Renderer& renderer) const;
+    bool collides(const Circle& other) const;
+
+    vec2 position() const { return position_; }
+    real_t radius() const { return radius_; }
 
    private:
     vec2 position_;

@@ -19,8 +19,9 @@ int main(int argc, char* argv[]) {
 
     World world(config.window_width, config.window_height, config.pixels_per_meter, config.gravity);
     SimSettings sim_settings(config.fps, config.ups);
-    CircleSettings circle_settings{config.spawn_limit, config.spawn_interval,
-                                   config.min_circle_radius, config.max_circle_radius};
+    CircleSettings circle_settings(config.spawn_limit, config.spawn_interval,
+                                   config.spawn_max_retries, config.min_circle_radius,
+                                   config.max_circle_radius);
 
     CircleSpawner spawner(world, circle_settings);
     try {
